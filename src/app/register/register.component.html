@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="background">
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+<form>
+  <h3>Register Here</h3>
+
+  <label>Username</label>
+  <input type="text" placeholder="Username" [(ngModel)]="signObj.username" [ngModelOptions]="{standalone: true}">
+
+  <label>Password</label>
+  <input type="password" placeholder="Password" [(ngModel)]="signObj.password" [ngModelOptions]="{standalone: true}">
+
+  <label>Name</label>
+  <input type="text" placeholder="Name" [(ngModel)]="signObj.name" [ngModelOptions]="{standalone: true}">
+
+  <label>Role</label>
+  <input type="text" placeholder="Role" [(ngModel)]="signObj.role" [ngModelOptions]="{standalone: true}">
+
+  <button (click)="onSign()">Register</button>
+
+</form>
+</body>
+</html>

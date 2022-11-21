@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+<ul>
+  <button class="button" (click)="onLogout()">Log Out</button>
+</ul>
+<div class="parent">
+<div class="child">
+  <form action="/action_page.php">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <label for="aname">Last name:</label><br>
+    <input type="text" id="aname" name="lname" value="Doe"><br><br>
+    <label for="ename">Last name:</label><br>
+    <input type="text" id="ename" name="lname" value="Doe"><br><br>
+    <input class="butto" type="submit" value="Submit">
+  </form>
+
+  <form action="/action_page.php">
+    <label for="fnam">First name:</label><br>
+    <input type="text" id="fnam" name="fname" value="John"><br>
+    <label for="lnam">Last name:</label><br>
+    <input type="text" id="lnam" name="lname" value="Doe"><br><br>
+    <label for="anam">Last name:</label><br>
+    <input type="text" id="anam" name="lname" value="Doe"><br><br>
+    <label for="enam">Last name:</label><br>
+    <input type="text" id="enam" name="lname" value="Doe"><br><br>
+    <input class="butto" type="submit" value="Submit">
+  </form>
+
+  <form action="/action_page.php">
+    <label for="namr">First name:</label><br>
+    <input type="text" id="namr" name="fname" value="John"><br>
+    <label for="namr">Last name:</label><br>
+    <input type="text" id="namrs" name="lname" value="Doe"><br><br>
+    <input class="butto" type="submit" value="Submit">
+  </form>
+
+</div>
+
+<div class="child">
+<button class="butto" (click)="getDev()">GetDevices</button>
+<table class="clsa">
+  <tr>
+    <th>Description</th>
+    <th>Address</th>
+    <th>Consumption</th>
+    <th>Username</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let item of deviceArr">
+    <td>{{item.description}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.maxHConsumption}}</td>
+    <td>{{item.username}}</td>
+    <button type="button" class="delete" (click)="onDelete1(item)">Delete</button>
+  </tr>
+</table>
+
+
+
+<button class="butto" (click)="getUs()">GetUsers</button>
+<table class="clse">
+  <tr>
+    <th>Name</th>
+    <th>Username</th>
+    <th>status</th>
+    <th>role</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let items of UserArr">
+    <td>{{items.name}}</td>
+    <td>{{items.username}}</td>
+    <td>{{items.status}}</td>
+    <td>{{items.role}}</td>
+    <button type="button" class="delete" (click)="onDelete(items)">Delete</button>
+  </tr>
+</table>
+</div>
+</div>
+
+</body>
+</html>

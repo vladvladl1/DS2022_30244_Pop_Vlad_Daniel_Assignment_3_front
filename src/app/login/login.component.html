@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="background">
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+<form>
+  <h3>Login Here</h3>
+
+  <label>Username</label>
+  <input type="text" placeholder="Email or Phone" [(ngModel)]="loginObj.username" [ngModelOptions]="{standalone: true}">
+
+  <label>Password</label>
+  <input type="password" placeholder="Password" [(ngModel)]="loginObj.password" [ngModelOptions]="{standalone: true}">
+
+  <button (click)="onLogin()">Log In</button>
+  <a routerLink="/register"> Register</a>
+
+</form>
+</body>
+</html>
+

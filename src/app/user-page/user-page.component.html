@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+<ul>
+  <button class="button" (click)="onLogout()">Log Out</button>
+</ul>
+
+
+
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Address</th>
+    <th>Consumption</th>
+    <th>Username</th>
+  </tr>
+  <tr *ngFor="let item of deviceArr">
+    <td>{{item.description}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.maxHConsumption}}</td>
+    <td>{{item.username}}</td>
+  </tr>
+</table>
+
+
+</body>
+</html>
