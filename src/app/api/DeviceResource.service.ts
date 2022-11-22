@@ -68,4 +68,58 @@ export class DeviceResourceService {
     console.log(options);
     return this.httpClient.delete<Device>(`${this.basePath}/device/delete/`+ id, options);
   }
+
+  public deviceEdit(token:string, device:Device,reportProgress?: boolean): Observable<Device>;
+  public deviceEdit(token: string, device:Device, reportProgress: boolean = false): Observable<Device> {
+    const options = {
+      headers: {
+        'Authorization': `Bearer "${token}"`
+      }
+    }
+
+    if (token == null) {
+      throw new Error("token is nul baiiiiiiiiiiiiii");
+    }else{
+      console.log("am primit token:" + token);
+
+    }
+    console.log(options);
+    return this.httpClient.patch<Device>(`${this.basePath}/device/edit/`,device, options);
+  }
+  public deviceCreate(token:string, device:Device,reportProgress?: boolean): Observable<Device>;
+  public deviceCreate(token: string, device:Device, reportProgress: boolean = false): Observable<Device> {
+    const options = {
+      headers: {
+        'Authorization': `Bearer "${token}"`
+      }
+    }
+
+    if (token == null) {
+      throw new Error("token is nul baiiiiiiiiiiiiii");
+    }else{
+      console.log("am primit token:" + token);
+
+    }
+    console.log(options);
+    return this.httpClient.post<Device>(`${this.basePath}/device/addDevice/`,device, options);
+  }
+
+  public mapping(token?:string, username?:string, reportProgress?: boolean): Observable<Device[]>;
+  public mapping(token?: string, username?:string,reportProgress: boolean = false): Observable<Device[]> {
+    const options = {
+      headers: {
+        'Authorization': `Bearer "${token}"`
+      }
+    }
+
+    if (token == null) {
+      throw new Error("token is nul baiiiiiiiiiiiiii");
+    }else{
+      console.log("am primit token:" + token);
+
+    }
+    console.log(options);
+    return this.httpClient.post<Device[]>(`${this.basePath}/device/getUP/` ,{username}, options);
+  }
+
 }

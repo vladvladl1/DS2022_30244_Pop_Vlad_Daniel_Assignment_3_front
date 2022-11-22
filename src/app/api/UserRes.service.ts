@@ -50,4 +50,22 @@ export class UserResService {
     return this.httpClient.delete<Device>(`${this.basePath}/user/delete/`+ username, options);
   }
 
+  public editUsers(token?:string, newuser?:User, reportProgress?: boolean): Observable<User>;
+  public editUsers(token?: string,newuser?:User, reportProgress: boolean = false): Observable<User> {
+    const options = {
+      headers: {
+        'Authorization': `Bearer "${token}"`
+      }
+    }
+
+    if (token == null) {
+      throw new Error("token is nul baiiiiiiiiiiiiii");
+    }else{
+      console.log("am primit token:" + token);
+
+    }
+    console.log(options);
+    return this.httpClient.patch<User>(`${this.basePath}/user/edit` ,newuser ,options);
+  }
+
 }

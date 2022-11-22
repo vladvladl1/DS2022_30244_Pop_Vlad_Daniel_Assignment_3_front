@@ -12,7 +12,9 @@ import {UserResService} from "../api/UserRes.service";
 })
 export class AdminPageComponent implements OnInit {
   logged: any;
+  username:any;
   deviceArr:any[] = [];
+  deviceArr1:any[] = [];
   UserArr:any[] = [];
   device:any = {
     _id:'',
@@ -45,13 +47,43 @@ export class AdminPageComponent implements OnInit {
 
     });
   }
+  map(){
+
+    this.deviceResource.mapping(this.logged, this.username).pipe(takeUntil(this.http)).subscribe(response => {
+      this.deviceArr1 = response;
+
+    });
+
+  }
 
   onDelete(user:any){
     this.userRes.userDelete(this.logged, user.username).pipe(takeUntil(this.http)).subscribe(response => {
 
     });
   }
+  onAdd(){
 
+    const device = {description:this.device.description,address:this.device.address,
+      maxHConsumption:this.device.maxHConsumption,username:this.device.username};
+    this.deviceResource.deviceCreate(this.logged, device).pipe(takeUntil(this.http)).subscribe(response => {
+
+    });
+  }
+
+  onEditDevice(){
+    const thedevice = {_id:this.device._id, description:this.device.description, address:this.device.address,
+      maxHConsumption:this.device.maxHConsumption, username:this.device.username};
+    this.deviceResource.deviceEdit(this.logged, thedevice).pipe(takeUntil(this.http)).subscribe(response => {
+
+    });
+  }
+
+  onEdit(){
+    const theuser = {name:this.user.name, username:this.user.username, status:this.user.status, role:this.user.role};
+    this.userRes.editUsers(this.logged, theuser).pipe(takeUntil(this.http)).subscribe(response => {
+      const s = response;
+    });
+  }
 
   getDev(){
 

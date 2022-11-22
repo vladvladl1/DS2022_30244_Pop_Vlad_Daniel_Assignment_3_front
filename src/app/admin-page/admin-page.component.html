@@ -10,44 +10,62 @@
 </ul>
 <div class="parent">
 <div class="child">
-  <form action="/action_page.php">
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" name="fname" value="John"><br>
-    <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname" value="Doe"><br><br>
-    <label for="aname">Last name:</label><br>
-    <input type="text" id="aname" name="lname" value="Doe"><br><br>
-    <label for="ename">Last name:</label><br>
-    <input type="text" id="ename" name="lname" value="Doe"><br><br>
-    <input class="butto" type="submit" value="Submit">
+  <form>
+    <label>Username</label>
+    <input type="text" placeholder="username" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}">
+    <label>Name</label>
+    <input type="text" placeholder="name" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}">
+    <label>Role</label>
+    <input type="text" placeholder="role" [(ngModel)]="user.role" [ngModelOptions]="{standalone: true}">
+    <label>Status</label>
+    <input type="text" placeholder="status" [(ngModel)]="user.status" [ngModelOptions]="{standalone: true}">
+    <input class="butto" type="submit" value="Edit User" (click)="onEdit()">
   </form>
 
-  <form action="/action_page.php">
-    <label for="fnam">First name:</label><br>
-    <input type="text" id="fnam" name="fname" value="John"><br>
-    <label for="lnam">Last name:</label><br>
-    <input type="text" id="lnam" name="lname" value="Doe"><br><br>
-    <label for="anam">Last name:</label><br>
-    <input type="text" id="anam" name="lname" value="Doe"><br><br>
-    <label for="enam">Last name:</label><br>
-    <input type="text" id="enam" name="lname" value="Doe"><br><br>
-    <input class="butto" type="submit" value="Submit">
+  <form>
+    <label>ID</label>
+    <input type="text" placeholder="id" [(ngModel)]="device._id" [ngModelOptions]="{standalone: true}">
+    <label>Description</label>
+    <input type="text" placeholder="description" [(ngModel)]="device.description" [ngModelOptions]="{standalone: true}">
+    <label>Address</label>
+    <input type="text" placeholder="address" [(ngModel)]="device.address" [ngModelOptions]="{standalone: true}">
+    <label>Consumption</label>
+    <input type="text" placeholder="consumption" [(ngModel)]="device.maxHConsumption" [ngModelOptions]="{standalone: true}">
+    <label>Username</label>
+    <input type="text" placeholder="username" [(ngModel)]="device.username" [ngModelOptions]="{standalone: true}">
+    <input class="butto" type="submit" value="Add Device" (click)="onAdd()">
+    <input class="butto" type="submit" value="Edit Device" (click)="onEditDevice()">
   </form>
-
-  <form action="/action_page.php">
-    <label for="namr">First name:</label><br>
-    <input type="text" id="namr" name="fname" value="John"><br>
-    <label for="namr">Last name:</label><br>
-    <input type="text" id="namrs" name="lname" value="Doe"><br><br>
-    <input class="butto" type="submit" value="Submit">
+  <form>
+    <input type="text" placeholder="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
   </form>
 
 </div>
 
 <div class="child">
+  <button class="butto" (click)="map()">map</button>
+  <table class="clsa">
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+      <th>Address</th>
+      <th>Consumption</th>
+      <th>Username</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let iteme of deviceArr1">
+      <td>{{iteme._id}}</td>
+      <td>{{iteme.description}}</td>
+      <td>{{iteme.address}}</td>
+      <td>{{iteme.maxHConsumption}}</td>
+      <td>{{iteme.username}}</td>
+      <button type="button" class="delete" (click)="onDelete1(iteme)">Delete</button>
+    </tr>
+  </table>
 <button class="butto" (click)="getDev()">GetDevices</button>
 <table class="clsa">
   <tr>
+    <th>ID</th>
     <th>Description</th>
     <th>Address</th>
     <th>Consumption</th>
@@ -55,6 +73,7 @@
     <th></th>
   </tr>
   <tr *ngFor="let item of deviceArr">
+    <td>{{item._id}}</td>
     <td>{{item.description}}</td>
     <td>{{item.address}}</td>
     <td>{{item.maxHConsumption}}</td>
