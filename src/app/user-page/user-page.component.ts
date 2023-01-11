@@ -4,7 +4,8 @@ import {UserTok} from "../models/userTok";
 import {UsersResourceService} from "../api/userResource.service";
 import {Router} from "@angular/router";
 import {DeviceResourceService} from "../api/DeviceResource.service";
-
+import {webSocket} from "rxjs/webSocket";
+import Swal from 'sweetalert2';
 import {DialogComponent} from "../dialog/dialog.component";
 
 @Component({
@@ -14,6 +15,7 @@ import {DialogComponent} from "../dialog/dialog.component";
 })
 export class UserPageComponent implements OnInit {
   logged: any;
+  subject = webSocket('ws://localhost:8081/');
   private http: Subject<any> = new Subject<any>();
   deviceArr:any[] = [];
   device:any = {
@@ -34,6 +36,11 @@ export class UserPageComponent implements OnInit {
       this.deviceArr = response;
       localStorage.setItem('devicesUser', JSON.stringify(this.deviceArr));
     });
+    this.subject.asObservable().subscribe(val => {
+      console.log(val);
+
+      Swal.fire({title:'s-a intrecut pragul', text:"cu valoarea " + val});
+    });
   }
 
 
@@ -46,7 +53,9 @@ export class UserPageComponent implements OnInit {
 
 
 
-
+  onChat(){
+    this.router.navigate(['/', 'chat']);
+  }
 
   onLogout(){
     const localData = localStorage.getItem("logginUsers");
