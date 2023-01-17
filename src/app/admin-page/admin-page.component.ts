@@ -55,7 +55,9 @@ export class AdminPageComponent implements OnInit {
     });
 
   }
-
+  onChat(){
+    this.router.navigate(['/', 'adminchat']);
+  }
   onDelete(user:any){
     this.userRes.userDelete(this.logged, user.username).pipe(takeUntil(this.http)).subscribe(response => {
 

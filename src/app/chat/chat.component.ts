@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {UserResService} from "../api/UserRes.service";
 import {Subject, takeUntil} from "rxjs";
-import {User} from "../models/user"
+import {User} from "../models/user";
+import {ChatService} from '../services/chat/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,11 +15,11 @@ export class ChatComponent implements OnInit {
 
 
   public messageText: any;
-  public messageArray: { user: string, message: string }[] = [];
+  public messageArray: { user: User, message: string }[] = [];
   private storageArray = [];
-
+  roomId = '1';
   public showScreen = true;
-
+  logged: any;
   private user1:User = {
     name: '',
     username: '',
@@ -31,26 +32,51 @@ export class ChatComponent implements OnInit {
   public users: User[] = [];
 
   constructor(
-    private userService: UserResService // clasa cu get post users
+    private userService: UserResService, // clasa cu get post users
+    private chatService: ChatService
   ) { }
 
   ngOnInit(): void {
-    this.getUsers();
+
+    const localData = localStorage.getItem("logginUsers");
+    if(localData!=null){
+      this.logged = JSON.parse(localData);
+    }
+    this.getUser();
+
+    this.chatService.getMessage()
+      .subscribe((data: { user: string,room:string, message: string }) => {
+        // this.messageArray.push(data);
+
+          setTimeout(() => {
+            var usermsg = {user:this.currentUser.username,message: data.message};
+            this.messageArray.push(usermsg);
+
+          }, 500);
+
+      });
   }
 
-  private getUsers() {
-    this.userService.getAllUsers().pipe(takeUntil(this.httpCancelSubject)).subscribe( response => {
-      this.users = response;
-      //this.selectedUser = this.users[0];
+  private getUser() {
+    this.userService.getMe(this.logged).pipe(takeUntil(this.httpCancelSubject)).subscribe( response => {
+      this.currentUser = response;
+      this.join(this.currentUser.username, this.currentUser.username);
     });
   }
 
   selectUserHandler(name: string | undefined): void {
     this.selectedUser = this.users.find(user => user.username === name);
   }
-
+  join(username: string, roomId: string): void {
+    this.chatService.joinRoom({user: username, room: roomId});
+  }
   sendMessage(): void {
-   // this.messageText = '';
+    var sendit = {user:this.currentUser.username, room:this.currentUser.username, message: this.messageText}
+    this.chatService.sendMessage(sendit);
+    var usermsg = {user:this.currentUser.username,message: this.messageText};
+    //this.messageArray.push(usermsg);
+    const localData1 = localStorage.setItem("mesaje", JSON.stringify(usermsg));
+    this.messageText = "";
   }
 }
 

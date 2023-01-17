@@ -32,6 +32,26 @@ export class UserResService {
     console.log(options);
     return this.httpClient.get<User[]>(`${this.basePath}/user/getAllUsers` , options);
   }
+
+
+  public getMe(token?:string, reportProgress?: boolean): Observable<User>;
+  public getMe(token?: string, reportProgress: boolean = false): Observable<User> {
+    const options = {
+      headers: {
+        'Authorization': `Bearer "${token}"`
+      }
+    }
+
+    if (token == null) {
+      throw new Error("token is nul baiiiiiiiiiiiiii");
+    }else{
+      console.log("am primit token:" + token);
+
+    }
+    console.log(options);
+    return this.httpClient.get<User>(`${this.basePath}/user/getMe` , options);
+  }
+
   public userDelete(token:string, username:string,reportProgress?: boolean): Observable<User>;
   public userDelete(token: string, username:string, reportProgress: boolean = false): Observable<User> {
     const options = {

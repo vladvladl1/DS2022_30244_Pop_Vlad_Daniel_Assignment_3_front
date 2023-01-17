@@ -17,6 +17,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { DialogComponent } from './dialog/dialog.component';
 import {UserResService} from "./api/UserRes.service";
 import { ChatComponent } from './chat/chat.component';
+import { ChatAdminComponent } from './chat-admin/chat-admin.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ChatComponent } from './chat/chat.component';
     UserPageComponent,
     AdminPageComponent,
     DialogComponent,
-    ChatComponent
+    ChatComponent,
+    ChatAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,10 @@ import { ChatComponent } from './chat/chat.component';
       {
         path: 'chat',
         component: ChatComponent
+      },
+      {
+        path: 'adminchat',
+        component: ChatAdminComponent
       }
     ]),
     FormsModule,

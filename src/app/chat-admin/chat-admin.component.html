@@ -1,26 +1,42 @@
 <div class="container-fluid">
   <div class="">
 
+    <div class="col-md-5">
 
+      <div class="user-list-card">
+        <div class="user-card"
+             [class.active]="user?.username === selectedUser?.username && 'active'"
+             *ngFor="let user of allUsers"
+             (click)="selectUserHandler(user?.username)"
+        >
 
+          <img src="../../../assets/userIcon.png"
+               [alt]="user?.username"
+               class="avatar"
+          />
+          <p class="username">{{user?.username}}</p>
+          <p class="username" *ngIf="user?.username == currentUser.username">(YOU)</p>
+        </div>
+      </div>
 
+    </div>
     <div class="col-md-7">
 
       <div class="chat-container">
-        <ng-container *ngIf="currentUser">
+        <ng-container *ngIf="selectedUser">
           <div class="chat-header">
 
             <img src="../../../assets/userIcon.png"
-                 [alt]="selectedUser?.name"
+                 [alt]="selectedUser?.username"
                  class="avatar"
             />
-            <p class="username">{{currentUser?.name}} ({{currentUser.role}})</p>
+            <p class="username">{{selectedUser?.username}} ({{selectedUser.role}})</p>
 
           </div>
 
           <div class="chat-body">
             <div *ngFor="let item of messageArray"
-                 [class.active]="item?.user === currentUser && 'same-user'"
+                 [class.active]="item?.user === selectedUser?.username && 'same-user'"
             >
               <p class="message-container">{{item?.message}}</p>
             </div>
